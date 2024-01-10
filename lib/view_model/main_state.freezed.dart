@@ -23,6 +23,8 @@ mixin _$MainState {
   int get dateLength => throw _privateConstructorUsedError;
   double get lat => throw _privateConstructorUsedError;
   double get lng => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
+  WeatherModel? get model => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +37,14 @@ abstract class $MainStateCopyWith<$Res> {
   factory $MainStateCopyWith(MainState value, $Res Function(MainState) then) =
       _$MainStateCopyWithImpl<$Res, MainState>;
   @useResult
-  $Res call({int dateLength, double lat, double lng});
+  $Res call(
+      {int dateLength,
+      double lat,
+      double lng,
+      bool isLoading,
+      WeatherModel? model});
+
+  $WeatherModelCopyWith<$Res>? get model;
 }
 
 /// @nodoc
@@ -54,6 +63,8 @@ class _$MainStateCopyWithImpl<$Res, $Val extends MainState>
     Object? dateLength = null,
     Object? lat = null,
     Object? lng = null,
+    Object? isLoading = null,
+    Object? model = freezed,
   }) {
     return _then(_value.copyWith(
       dateLength: null == dateLength
@@ -68,7 +79,27 @@ class _$MainStateCopyWithImpl<$Res, $Val extends MainState>
           ? _value.lng
           : lng // ignore: cast_nullable_to_non_nullable
               as double,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      model: freezed == model
+          ? _value.model
+          : model // ignore: cast_nullable_to_non_nullable
+              as WeatherModel?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $WeatherModelCopyWith<$Res>? get model {
+    if (_value.model == null) {
+      return null;
+    }
+
+    return $WeatherModelCopyWith<$Res>(_value.model!, (value) {
+      return _then(_value.copyWith(model: value) as $Val);
+    });
   }
 }
 
@@ -80,7 +111,15 @@ abstract class _$$MainStateImplCopyWith<$Res>
       __$$MainStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int dateLength, double lat, double lng});
+  $Res call(
+      {int dateLength,
+      double lat,
+      double lng,
+      bool isLoading,
+      WeatherModel? model});
+
+  @override
+  $WeatherModelCopyWith<$Res>? get model;
 }
 
 /// @nodoc
@@ -97,6 +136,8 @@ class __$$MainStateImplCopyWithImpl<$Res>
     Object? dateLength = null,
     Object? lat = null,
     Object? lng = null,
+    Object? isLoading = null,
+    Object? model = freezed,
   }) {
     return _then(_$MainStateImpl(
       dateLength: null == dateLength
@@ -111,6 +152,14 @@ class __$$MainStateImplCopyWithImpl<$Res>
           ? _value.lng
           : lng // ignore: cast_nullable_to_non_nullable
               as double,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      model: freezed == model
+          ? _value.model
+          : model // ignore: cast_nullable_to_non_nullable
+              as WeatherModel?,
     ));
   }
 }
@@ -118,7 +167,12 @@ class __$$MainStateImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$MainStateImpl with DiagnosticableTreeMixin implements _MainState {
-  const _$MainStateImpl({this.dateLength = 0, this.lat = 0, this.lng = 0});
+  const _$MainStateImpl(
+      {this.dateLength = 0,
+      this.lat = 0,
+      this.lng = 0,
+      this.isLoading = false,
+      this.model});
 
   factory _$MainStateImpl.fromJson(Map<String, dynamic> json) =>
       _$$MainStateImplFromJson(json);
@@ -132,10 +186,15 @@ class _$MainStateImpl with DiagnosticableTreeMixin implements _MainState {
   @override
   @JsonKey()
   final double lng;
+  @override
+  @JsonKey()
+  final bool isLoading;
+  @override
+  final WeatherModel? model;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MainState(dateLength: $dateLength, lat: $lat, lng: $lng)';
+    return 'MainState(dateLength: $dateLength, lat: $lat, lng: $lng, isLoading: $isLoading, model: $model)';
   }
 
   @override
@@ -145,7 +204,9 @@ class _$MainStateImpl with DiagnosticableTreeMixin implements _MainState {
       ..add(DiagnosticsProperty('type', 'MainState'))
       ..add(DiagnosticsProperty('dateLength', dateLength))
       ..add(DiagnosticsProperty('lat', lat))
-      ..add(DiagnosticsProperty('lng', lng));
+      ..add(DiagnosticsProperty('lng', lng))
+      ..add(DiagnosticsProperty('isLoading', isLoading))
+      ..add(DiagnosticsProperty('model', model));
   }
 
   @override
@@ -156,12 +217,16 @@ class _$MainStateImpl with DiagnosticableTreeMixin implements _MainState {
             (identical(other.dateLength, dateLength) ||
                 other.dateLength == dateLength) &&
             (identical(other.lat, lat) || other.lat == lat) &&
-            (identical(other.lng, lng) || other.lng == lng));
+            (identical(other.lng, lng) || other.lng == lng) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.model, model) || other.model == model));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, dateLength, lat, lng);
+  int get hashCode =>
+      Object.hash(runtimeType, dateLength, lat, lng, isLoading, model);
 
   @JsonKey(ignore: true)
   @override
@@ -181,7 +246,9 @@ abstract class _MainState implements MainState {
   const factory _MainState(
       {final int dateLength,
       final double lat,
-      final double lng}) = _$MainStateImpl;
+      final double lng,
+      final bool isLoading,
+      final WeatherModel? model}) = _$MainStateImpl;
 
   factory _MainState.fromJson(Map<String, dynamic> json) =
       _$MainStateImpl.fromJson;
@@ -192,6 +259,10 @@ abstract class _MainState implements MainState {
   double get lat;
   @override
   double get lng;
+  @override
+  bool get isLoading;
+  @override
+  WeatherModel? get model;
   @override
   @JsonKey(ignore: true)
   _$$MainStateImplCopyWith<_$MainStateImpl> get copyWith =>

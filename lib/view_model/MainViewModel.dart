@@ -4,12 +4,10 @@ import 'package:intl/intl.dart';
 import 'package:weather_app/domain/repository/weather_repository.dart';
 import 'package:weather_app/view_model/main_state.dart';
 import '../data/repository/locate_repository.dart';
-import '../domain/model/weather_model.dart';
 
 class MainViewModel extends ChangeNotifier {
   final WeatherRepository _weatherRepository;
   final LocateRepository _locaterepository;
-  WeatherModel? model;
 
   MainViewModel({
     required WeatherRepository weatherRepository,
@@ -23,16 +21,24 @@ class MainViewModel extends ChangeNotifier {
 
 
   Future<void> getWeatherData() async {
+    notifyListeners();
     await getLocateData();
 
-    model = await _weatherRepository.getWeatherData('${_state.lat}', '${_state.lng}');
+    _state = _state.copyWith(
+      isLoading: false,
+    );
+    notifyListeners();
+
+    final model = await _weatherRepository.getWeatherData('${_state.lat}', '${_state.lng}');
 
     String date = DateFormat('yyyy-MM-ddTHH:00').format(_time);
 
-    int length = model!.time.indexOf(date);
+    int length = model.time.indexOf(date);
 
     _state = _state.copyWith(
+      model: model,
       dateLength: length,
+      isLoading: true,
     );
     notifyListeners();
   }

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
-import 'package:weather_app/data/repository/locate_repository.dart';
 import 'package:weather_app/view_model/MainViewModel.dart';
-
-import '../di/di_setup.dart';
+import 'package:weather_app/view_model/main_state.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -25,17 +22,25 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<MainViewModel>();
+    final state = viewModel.state;
     return Scaffold(
       body: Center(
-          child: Column(
-              children: [
-          viewModel.model == null ?
-          const CircularProgressIndicator()
-              :Text(viewModel.model!.time[viewModel.state.
-          dateLength])
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            !state.isLoading
+                ? const CircularProgressIndicator()
+                : getMenu(state)
+          ],
+        ),
+      ),
+    );
+  }
+  Widget getMenu(MainState state) {
+    return Column(
+      children: [
+        Text('${state.model!.temperature[state.dateLength]}\'c',style: const TextStyle(fontSize: 30),),
       ],
-    ),)
-    ,
     );
   }
 }
