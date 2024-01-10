@@ -25,6 +25,7 @@ mixin _$MainState {
   double get lng => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   WeatherModel? get model => throw _privateConstructorUsedError;
+  WeatherCodeModel? get codeModel => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,9 +43,11 @@ abstract class $MainStateCopyWith<$Res> {
       double lat,
       double lng,
       bool isLoading,
-      WeatherModel? model});
+      WeatherModel? model,
+      WeatherCodeModel? codeModel});
 
   $WeatherModelCopyWith<$Res>? get model;
+  $WeatherCodeModelCopyWith<$Res>? get codeModel;
 }
 
 /// @nodoc
@@ -65,6 +68,7 @@ class _$MainStateCopyWithImpl<$Res, $Val extends MainState>
     Object? lng = null,
     Object? isLoading = null,
     Object? model = freezed,
+    Object? codeModel = freezed,
   }) {
     return _then(_value.copyWith(
       dateLength: null == dateLength
@@ -87,6 +91,10 @@ class _$MainStateCopyWithImpl<$Res, $Val extends MainState>
           ? _value.model
           : model // ignore: cast_nullable_to_non_nullable
               as WeatherModel?,
+      codeModel: freezed == codeModel
+          ? _value.codeModel
+          : codeModel // ignore: cast_nullable_to_non_nullable
+              as WeatherCodeModel?,
     ) as $Val);
   }
 
@@ -99,6 +107,18 @@ class _$MainStateCopyWithImpl<$Res, $Val extends MainState>
 
     return $WeatherModelCopyWith<$Res>(_value.model!, (value) {
       return _then(_value.copyWith(model: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $WeatherCodeModelCopyWith<$Res>? get codeModel {
+    if (_value.codeModel == null) {
+      return null;
+    }
+
+    return $WeatherCodeModelCopyWith<$Res>(_value.codeModel!, (value) {
+      return _then(_value.copyWith(codeModel: value) as $Val);
     });
   }
 }
@@ -116,10 +136,13 @@ abstract class _$$MainStateImplCopyWith<$Res>
       double lat,
       double lng,
       bool isLoading,
-      WeatherModel? model});
+      WeatherModel? model,
+      WeatherCodeModel? codeModel});
 
   @override
   $WeatherModelCopyWith<$Res>? get model;
+  @override
+  $WeatherCodeModelCopyWith<$Res>? get codeModel;
 }
 
 /// @nodoc
@@ -138,6 +161,7 @@ class __$$MainStateImplCopyWithImpl<$Res>
     Object? lng = null,
     Object? isLoading = null,
     Object? model = freezed,
+    Object? codeModel = freezed,
   }) {
     return _then(_$MainStateImpl(
       dateLength: null == dateLength
@@ -160,6 +184,10 @@ class __$$MainStateImplCopyWithImpl<$Res>
           ? _value.model
           : model // ignore: cast_nullable_to_non_nullable
               as WeatherModel?,
+      codeModel: freezed == codeModel
+          ? _value.codeModel
+          : codeModel // ignore: cast_nullable_to_non_nullable
+              as WeatherCodeModel?,
     ));
   }
 }
@@ -172,7 +200,8 @@ class _$MainStateImpl with DiagnosticableTreeMixin implements _MainState {
       this.lat = 0,
       this.lng = 0,
       this.isLoading = false,
-      this.model});
+      this.model,
+      this.codeModel});
 
   factory _$MainStateImpl.fromJson(Map<String, dynamic> json) =>
       _$$MainStateImplFromJson(json);
@@ -191,10 +220,12 @@ class _$MainStateImpl with DiagnosticableTreeMixin implements _MainState {
   final bool isLoading;
   @override
   final WeatherModel? model;
+  @override
+  final WeatherCodeModel? codeModel;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MainState(dateLength: $dateLength, lat: $lat, lng: $lng, isLoading: $isLoading, model: $model)';
+    return 'MainState(dateLength: $dateLength, lat: $lat, lng: $lng, isLoading: $isLoading, model: $model, codeModel: $codeModel)';
   }
 
   @override
@@ -206,7 +237,8 @@ class _$MainStateImpl with DiagnosticableTreeMixin implements _MainState {
       ..add(DiagnosticsProperty('lat', lat))
       ..add(DiagnosticsProperty('lng', lng))
       ..add(DiagnosticsProperty('isLoading', isLoading))
-      ..add(DiagnosticsProperty('model', model));
+      ..add(DiagnosticsProperty('model', model))
+      ..add(DiagnosticsProperty('codeModel', codeModel));
   }
 
   @override
@@ -220,13 +252,15 @@ class _$MainStateImpl with DiagnosticableTreeMixin implements _MainState {
             (identical(other.lng, lng) || other.lng == lng) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.model, model) || other.model == model));
+            (identical(other.model, model) || other.model == model) &&
+            (identical(other.codeModel, codeModel) ||
+                other.codeModel == codeModel));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, dateLength, lat, lng, isLoading, model);
+  int get hashCode => Object.hash(
+      runtimeType, dateLength, lat, lng, isLoading, model, codeModel);
 
   @JsonKey(ignore: true)
   @override
@@ -248,7 +282,8 @@ abstract class _MainState implements MainState {
       final double lat,
       final double lng,
       final bool isLoading,
-      final WeatherModel? model}) = _$MainStateImpl;
+      final WeatherModel? model,
+      final WeatherCodeModel? codeModel}) = _$MainStateImpl;
 
   factory _MainState.fromJson(Map<String, dynamic> json) =
       _$MainStateImpl.fromJson;
@@ -263,6 +298,8 @@ abstract class _MainState implements MainState {
   bool get isLoading;
   @override
   WeatherModel? get model;
+  @override
+  WeatherCodeModel? get codeModel;
   @override
   @JsonKey(ignore: true)
   _$$MainStateImplCopyWith<_$MainStateImpl> get copyWith =>

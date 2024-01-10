@@ -15,6 +15,10 @@ _$MainStateImpl _$$MainStateImplFromJson(Map<String, dynamic> json) =>
       model: json['model'] == null
           ? null
           : WeatherModel.fromJson(json['model'] as Map<String, dynamic>),
+      codeModel: json['codeModel'] == null
+          ? null
+          : WeatherCodeModel.fromJson(
+              json['codeModel'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$MainStateImplToJson(_$MainStateImpl instance) =>
@@ -24,4 +28,5 @@ Map<String, dynamic> _$$MainStateImplToJson(_$MainStateImpl instance) =>
       'lng': instance.lng,
       'isLoading': instance.isLoading,
       'model': instance.model,
+      'codeModel': instance.codeModel,
     };

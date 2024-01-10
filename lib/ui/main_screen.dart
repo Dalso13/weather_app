@@ -39,6 +39,8 @@ class _MainScreenState extends State<MainScreen> {
   Widget getMenu(MainState state) {
     return Column(
       children: [
+        Text('현재 위치 날씨',style: TextStyle(fontSize: 30)),
+        Image.network(state.codeModel!.image),
         Text('${state.model!.temperature[state.dateLength]}\'c',style: const TextStyle(fontSize: 30),),
       ],
     );

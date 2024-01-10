@@ -1,3 +1,5 @@
+import 'package:weather_app/domain/model/weather_code_model.dart';
+
 import '../api/weather_code_api.dart';
 
 class WeatherCodeRepository {
@@ -7,8 +9,10 @@ class WeatherCodeRepository {
     required WeatherCodeApi api,
   }) : _api = api;
 
-  Future<Map<String,dynamic>> getWeatherCode(String code) async {
+  Future<WeatherCodeModel> getWeatherCode(String code , String day) async {
     final json = await _api.getWeatherCode(code);
-    return json[code];
+    final weatherCode = json[code];
+    final dayWeather = weatherCode[day];
+    return WeatherCodeModel.fromJson(dayWeather);
   }
 }
